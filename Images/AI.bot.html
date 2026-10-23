@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym AI Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #response-container {
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        #response-container img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+        #response {
+            flex: 1;
+            font-size: 16px;
+            color: #333;
+        }
+        #loading {
+            display: none;
+            font-size: 16px;
+            color: #333;
+        }
+        #loading span {
+            display: inline-block;
+            animation: blink 1.5s infinite;
+        }
+        #loading span:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        #loading span:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        @keyframes blink {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="cybex-theme.css">
+</head>
+<body class="ai-page">
+    <header>
+        <h1>Gym AI Assistant</h1>
+        <p>Ask me anything about gym and fitness!</p>
+    </header>
+    <main>
+        <form id="questionForm">
+            <input type="text" id="question" placeholder="Type your gym-related question here..." required>
+            <button type="submit">Ask</button>
+        </form>
+        <div id="response-container">
+            <div id="response"></div>
+            <div id="loading"><span>.</span><span>.</span><span>.</span></div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('questionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const question = document.getElementById('question').value.trim().toLowerCase();
+            const responseDiv = document.getElementById('response');
+            const loadingDiv = document.getElementById('loading');
+
+            // Clear previous response and show loading animation
+            responseDiv.textContent = '';
+            loadingDiv.style.display = 'inline-block';
+
+            setTimeout(() => {
+                // Hide loading animation and provide the response
+                loadingDiv.style.display = 'none';
+
+                if (question === 'hello' || question === 'hi' || question === 'hey') {
+                    responseDiv.textContent = "Hi there! 👋 I'm your Gym AI Assistant. How can I help you today? Feel free to ask me anything about workouts, nutrition, or fitness!";
+                } else if (question.includes('workout for biceps')) {
+                    responseDiv.textContent = "For building strong biceps, focus on exercises like barbell curls, dumbbell hammer curls, and concentration curls. Aim for 3-4 sets of 8-12 reps with proper form. Don’t forget to progressively increase the weight over time for better results!";
+                } else if (question.includes('lose belly fat')) {
+                    responseDiv.textContent = "Losing belly fat requires a combination of a calorie deficit, regular cardio (like running or cycling), and strength training to build muscle. Pair this with a balanced diet rich in whole foods and avoid processed sugars. Consistency is key!";
+                } else if (question.includes('good chest workout')) {
+                    responseDiv.textContent = "For a strong chest, try bench presses (flat, incline, and decline), push-ups, and dumbbell flyes. Perform 3-4 sets of 8-12 reps for each exercise. Focus on proper form and gradually increase the weight.";
+                } else if (question.includes('how to gain muscle')) {
+                    responseDiv.textContent = "To gain muscle, focus on compound exercises like squats, deadlifts, and bench presses. Eat a high-protein diet (1.6-2.2g of protein per kg of body weight) and ensure you're in a calorie surplus. Rest and recovery are just as important as training!";
+                } else if (question.includes('how to improve stamina')) {
+                    responseDiv.textContent = "To improve stamina, incorporate activities like running, cycling, or swimming into your routine. Gradually increase the duration and intensity over time. Interval training and consistent practice are highly effective!";
+                } else if (question.includes('stretching routine')) {
+                    responseDiv.textContent = "A good stretching routine includes dynamic stretches before workouts (like leg swings or arm circles) and static stretches after workouts (like hamstring stretches or shoulder stretches). Hold each stretch for 20-30 seconds.";
+                } else if (question.includes('best time to workout')) {
+                    responseDiv.textContent = "The best time to work out depends on your schedule and energy levels. Morning workouts can boost your metabolism, while evening workouts may allow for better performance. Choose a time you can stick to consistently!";
+                } else if (question.includes('how to warm up')) {
+                    responseDiv.textContent = "A proper warm-up prepares your body for exercise and reduces the risk of injury. Start with 5-10 minutes of light cardio (like jogging or cycling) followed by dynamic stretches targeting the muscles you'll use.";
+                } else if (question.includes('cool down')) {
+                    responseDiv.textContent = "Cooling down helps your body recover after exercise. Spend 5-10 minutes doing light cardio to lower your heart rate, followed by static stretches to improve flexibility and reduce soreness.";
+                } else if (question.includes('how to build abs')) {
+                    responseDiv.textContent = "Building abs requires a combination of core exercises (like planks, crunches, and leg raises) and reducing body fat through a calorie deficit. Consistency in both training and diet is essential!";
+                } else if (question.includes('how to increase strength')) {
+                    responseDiv.textContent = "To increase strength, focus on compound lifts like squats, deadlifts, and bench presses. Use heavier weights with lower reps (4-6 per set) and ensure proper recovery between sessions.";
+                } else if (question.includes('how to improve flexibility')) {
+                    responseDiv.textContent = "To improve flexibility, incorporate static stretching and yoga into your routine. Hold each stretch for 20-30 seconds and focus on deep breathing to relax your muscles.";
+                } else if (question.includes('how to lose weight')) {
+                    responseDiv.textContent = "To lose weight, maintain a calorie deficit by eating fewer calories than you burn. Combine strength training, cardio, and a balanced diet to achieve sustainable results.";
+                } else if (question.includes('how to bulk up')) {
+                    responseDiv.textContent = "To bulk up, eat in a calorie surplus with a focus on protein-rich foods. Combine this with heavy strength training and progressive overload to build muscle mass.";
+                } else if (question.includes('how to recover faster')) {
+                    responseDiv.textContent = "To recover faster, prioritize sleep (7-9 hours per night), stay hydrated, and eat a balanced diet. Active recovery, like light walking or yoga, can also help reduce soreness.";
+                } else if (question.includes('how to fix posture')) {
+                    responseDiv.textContent = "To fix posture, focus on strengthening your back and core muscles with exercises like rows, planks, and deadlifts. Stretch tight muscles, such as your chest and hip flexors, regularly.";
+                } else if (question.includes('how to avoid injury')) {
+                    responseDiv.textContent = "To avoid injury, always warm up before exercising, use proper form, and avoid lifting weights that are too heavy. Listen to your body and rest if you feel pain or discomfort.";
+                } else if (question.includes('how to improve grip strength')) {
+                    responseDiv.textContent = "To improve grip strength, try exercises like farmer's carries, deadlifts, and hanging from a pull-up bar. Using grip trainers or squeezing a stress ball can also help.";
+                } else if (question.includes('how to train legs')) {
+                    responseDiv.textContent = "For strong legs, focus on exercises like squats, lunges, leg presses, and Romanian deadlifts. Include calf raises to target your lower legs. Perform 3-4 sets of 8-12 reps for each exercise.";
+                } else if (question.includes('how to train shoulders')) {
+                    responseDiv.textContent = "To train shoulders, include exercises like overhead presses, lateral raises, front raises, and face pulls. Focus on proper form and avoid using too much weight to prevent injury.";
+                } else {
+                    responseDiv.textContent = `That's an interesting question! "${question}" is a great topic. While I may not have a specific answer right now, I recommend consulting a fitness expert or trusted resources online. Let me know if you have another question—I’m here to help!`;
+                }
+
+                document.getElementById('question').value = '';
+            }, 1500); // Simulate a delay for the AI to "think"
+        });
+    </script>
+    <script src="cybex-motion.js" defer></script>
+</body>
+</html>
